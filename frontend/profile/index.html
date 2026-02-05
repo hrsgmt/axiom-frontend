@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Profile</title>
+</head>
+<body>
+  <h1>Profile</h1>
+  <pre id="output">Loading...</pre>
+  <button onclick="logout()">Logout</button>
+
+  <script type="module">
+    import { requireAuth, logout } from "./js/auth.js";
+    import { apiGet } from "./js/api.js";
+
+    const token = requireAuth();
+    if (!token) throw new Error("Not authenticated");
+
+    apiGet("/api/me")
+      .then(data => {
+        document.getElementById("output").textContent =
+          JSON.stringify(data, null, 2);
+      })
+      .catch(() => {
+        logout();
+      });
+
+    window.logout = logout;
+  </script>
+</body>
+</html>
