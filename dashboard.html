@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Dashboard</h2>
+  <pre id="data">Loading...</pre>
+  <button onclick="logout()">Logout</button>
+
+  <script src="/js/dashboard.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("token");
+      location.href = "/index.html";
+    }
+  </script>
+</body>
+</html>
+

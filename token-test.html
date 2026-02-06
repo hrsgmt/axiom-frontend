@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>Axiom Token Direct Test</h2>
+
+<button onclick="go()">Call /api/me</button>
+<pre id="out"></pre>
+
+<script>
+function go() {
+  fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
+    method: "GET",
+    headers: {
+      "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZiMmZkMzVlLWExMzUtNDVkOS1iOTNhLWY0ZTdjYjkwN2YxOSIsImVtYWlsIjoidmVyaWZ5QGF4aW9tLmFpIiwiaWF0IjoxNzcwMzUwODE4LCJleHAiOjE3NzA5NTU2MTh9.48Y4H-Edl7blmJhKS8I2CV_PXtfWwlbFMiware-WTFc"
+    }
+  })
+  .then(r => r.json())
+  .then(d => out.textContent = JSON.stringify(d, null, 2))
+  .catch(e => out.textContent = e.toString());
+}
+</script>
+
+</body>
+</html>

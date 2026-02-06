@@ -25,10 +25,14 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
+    // SAVE TOKEN
     localStorage.setItem("token", data.token);
+
+    // REDIRECT
     window.location.href = "/dashboard.html";
 
-  } catch (e) {
-    output.textContent = "❌ Network error";
+  } catch (err) {
+    console.error(err);
+    output.textContent = "❌ NETWORK ERROR";
   }
 });

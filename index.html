@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<body>
+  <h2>Axiom Frontend Test</h2>
+  <button onclick="test()">Test Backend</button>
+  <pre id="out">Idle</pre>
+
+  <script>
+    function test() {
+      fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
+        headers: {
+          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZiMmZkMzVlLWExMzUtNDVkOS1iOTNhLWY0ZTdjYjkwN2YxOSIsImVtYWlsIjoidmVyaWZ5QGF4aW9tLmFpIiwiaWF0IjoxNzcwMzUwMDQ2LCJleHAiOjE3NzA5NTQ4NDZ9.TxpsnYlVe6uX87YHfZGaBzkt1SguoZ1DOsUA7r_p1h0"
+        }
+      })
+      .then(r => r.json())
+      .then(d => document.getElementById("out").textContent = JSON.stringify(d, null, 2))
+      .catch(e => document.getElementById("out").textContent = e.toString());
+    }
+  </script>
+</body>
+</html>
