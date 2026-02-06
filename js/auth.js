@@ -1,22 +1,19 @@
 import { api } from "./api.js";
 
-document.getElementById("loginBtn").onclick = async () => {
-  const email = document.getElementById("email").value;
-  const password = document.getElementById("password").value;
-  const out = document.getElementById("out");
+document.querySelector("button").onclick = async () => {
+  const email = document.querySelector("input[type=email]").value;
+  const password = document.querySelector("input[type=password]").value;
 
-  out.textContent = "Logging in...";
+  const res = await fetch("https://axiom-backend-cnkz.onrender.com/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
+  });
 
-  try {
-    const data = await api("/api/auth/login", {
-      method: "POST",
-      body: JSON.stringify({ email, password })
-    });
+  const data = await res.json();
 
-    localStorage.setItem("token", data.token);
-    location.href = "/dashboard.html";
+  localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("refreshToken", data.refreshToken);
 
-  } catch (e) {
-    out.textContent = "❌ Login failed";
-  }
+  location.href = "/dashboard.html";
 };
