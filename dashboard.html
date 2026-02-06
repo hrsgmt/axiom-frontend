@@ -2,12 +2,12 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Axiom Dashboard</title>
+  <title>Dashboard</title>
 </head>
 <body>
 
 <h2>Dashboard</h2>
-<button onclick="loadProfile()">Load Profile</button>
+<button onclick="me()">Load Profile</button>
 
 <pre id="out"></pre>
 
@@ -19,20 +19,19 @@ if (!token) {
   location.href = "index.html";
 }
 
-async function loadProfile() {
+async function me() {
   try {
     const res = await fetch(API + "/api/me", {
       headers: {
-        Authorization: "Bearer " + token
+        "Authorization": "Bearer " + token
       }
     });
 
-    const data = await res.json();
-    out.textContent = JSON.stringify(data, null, 2);
+    const text = await res.text();
+    out.textContent = text;
 
   } catch (e) {
-    out.textContent = "ERROR ❌";
-    console.error(e);
+    out.textContent = "ERROR\\n" + e.toString();
   }
 }
 </script>
