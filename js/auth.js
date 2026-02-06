@@ -7,12 +7,12 @@ document.querySelector("button").onclick = async () => {
   try {
     const data = await api("/api/auth/login", {
       method: "POST",
-      body: JSON.stringify({ email, password })
+      body: { email, password }
     });
 
     localStorage.setItem("token", data.token);
-    location.href = "/dashboard.html";
-  } catch {
+    window.location.href = "dashboard.html";
+  } catch (e) {
     document.body.innerHTML += "<p>❌ Login failed</p>";
   }
 };
