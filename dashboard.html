@@ -1,3 +1,4 @@
+<button id="logout">Logout</button><script>document.getElementById("logout").onclick=()=>{localStorage.removeItem("token");location.href="/";};</script>
 <script>
 if(!localStorage.getItem("token")){location.href="/";}
 </script>
