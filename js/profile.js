@@ -1,12 +1,24 @@
-import { api } from "./api.js";
+const token = localStorage.getItem("token");
 
-(async () => {
-  const token = localStorage.getItem("token");
-  if (!token) return location.href = "/index.html";
+if (!token) {
+  location.href = "/";
+}
 
-  const data = await api("/api/me", {
-    headers: { Authorization: "Bearer " + token }
-  });
-
-  document.body.innerHTML = "<pre>" + JSON.stringify(data, null, 2) + "</pre>";
-})();
+fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
+  headers: {
+    Authorization: "Bearer " + token
+  }
+})
+.then(r => r.json())
+.then(d => {
+  if (d.error) {
+    localStorage.removeItem("token");
+    location.href = "/";
+  }
+  document.getElementById("profile").textContent =
+    JSON.stringify(d.decoded, null, 2);
+})
+.catch(() => {
+  localStorage.removeItem("token");
+  location.href = "/";
+});
