@@ -1,14 +1,16 @@
+const API_BASE = "https://axiom-backend-cnkz.onrender.com";
+
 export async function api(path, options = {}) {
-  const res = await fetch(path, {
+  const res = await fetch(API_BASE + path, {
+    method: options.method || "GET",
     headers: {
       "Content-Type": "application/json",
       ...(options.headers || {})
     },
-    ...options
+    body: options.body ? JSON.stringify(options.body) : undefined
   });
 
-  if (!res.ok) {
-    throw new Error("Request failed");
-  }
-  return res.json();
+  const data = await res.json();
+  if (!res.ok) throw data;
+  return data;
 }

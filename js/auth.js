@@ -13,6 +13,7 @@ document.querySelector("button").onclick = async () => {
     localStorage.setItem("token", data.token);
     window.location.href = "dashboard.html";
   } catch (e) {
-    document.body.innerHTML += "<p>❌ Login failed</p>";
+    alert("❌ Login failed");
+    console.error(e);
   }
 };
