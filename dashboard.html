@@ -1,3 +1,4 @@
+<button id="logout">Logout</button>
 <button id="logout">Logout</button><script>document.getElementById("logout").onclick=()=>{localStorage.removeItem("token");location.href="/";};</script>
 <script>
 if(!localStorage.getItem("token")){location.href="/";}
@@ -23,7 +24,7 @@ fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
 .catch(() => out.textContent = "❌ Unauthorized");
 </script>
 
-</body>
+<script src="/js/logout.js"></script></body>
 </html>
 
 <button onclick="logout()">Logout</button>
