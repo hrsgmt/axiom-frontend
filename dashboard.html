@@ -21,3 +21,11 @@ fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
 
 </body>
 </html>
+
+<button onclick="logout()">Logout</button>
+<script>
+function logout(){
+  localStorage.removeItem("token");
+  location.href = "/";
+}
+</script>
