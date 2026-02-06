@@ -1,17 +1,41 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Axiom Dashboard</title>
+</head>
 <body>
-  <h2>Dashboard</h2>
-  <pre id="data">Loading...</pre>
-  <button onclick="logout()">Logout</button>
 
-  <script src="/js/dashboard.js"></script>
-  <script>
-    function logout() {
-      localStorage.removeItem("token");
-      location.href = "/index.html";
-    }
-  </script>
+<h2>Dashboard</h2>
+<button onclick="loadProfile()">Load Profile</button>
+
+<pre id="out"></pre>
+
+<script>
+const API = "https://axiom-backend-cnkz.onrender.com";
+const token = localStorage.getItem("token");
+
+if (!token) {
+  location.href = "index.html";
+}
+
+async function loadProfile() {
+  try {
+    const res = await fetch(API + "/api/me", {
+      headers: {
+        Authorization: "Bearer " + token
+      }
+    });
+
+    const data = await res.json();
+    out.textContent = JSON.stringify(data, null, 2);
+
+  } catch (e) {
+    out.textContent = "ERROR ❌";
+    console.error(e);
+  }
+}
+</script>
+
 </body>
 </html>
-

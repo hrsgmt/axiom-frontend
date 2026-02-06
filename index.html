@@ -1,21 +1,53 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <meta charset="UTF-8">
+  <title>Axiom Login</title>
+</head>
 <body>
-  <h2>Axiom Frontend Test</h2>
-  <button onclick="test()">Test Backend</button>
-  <pre id="out">Idle</pre>
 
-  <script>
-    function test() {
-      fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
-        headers: {
-          "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImZiMmZkMzVlLWExMzUtNDVkOS1iOTNhLWY0ZTdjYjkwN2YxOSIsImVtYWlsIjoidmVyaWZ5QGF4aW9tLmFpIiwiaWF0IjoxNzcwMzUwMDQ2LCJleHAiOjE3NzA5NTQ4NDZ9.TxpsnYlVe6uX87YHfZGaBzkt1SguoZ1DOsUA7r_p1h0"
-        }
+<h2>Axiom Login</h2>
+
+<input id="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
+
+<button onclick="login()">Login</button>
+
+<pre id="out"></pre>
+
+<script>
+const API = "https://axiom-backend-cnkz.onrender.com";
+
+async function login() {
+  out.textContent = "Logging in...";
+
+  try {
+    const res = await fetch(API + "/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
       })
-      .then(r => r.json())
-      .then(d => document.getElementById("out").textContent = JSON.stringify(d, null, 2))
-      .catch(e => document.getElementById("out").textContent = e.toString());
+    });
+
+    const data = await res.json();
+
+    if (!res.ok) {
+      out.textContent = JSON.stringify(data, null, 2);
+      return;
     }
-  </script>
+
+    localStorage.setItem("token", data.token);
+    out.textContent = "LOGIN SUCCESS ✅";
+    window.location.href = "dashboard.html";
+
+  } catch (e) {
+    out.textContent = "NETWORK ERROR ❌";
+    console.error(e);
+  }
+}
+</script>
+
 </body>
 </html>
