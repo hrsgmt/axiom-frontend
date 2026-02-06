@@ -1,19 +1,22 @@
 import { api } from "./api.js";
 
-document.querySelector("button").onclick = async () => {
-  const email = document.querySelector("input[type=email]").value;
-  const password = document.querySelector("input[type=password]").value;
+document.getElementById("loginBtn").onclick = async () => {
+  const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
+  const out = document.getElementById("out");
+
+  out.textContent = "Logging in...";
 
   try {
     const data = await api("/api/auth/login", {
       method: "POST",
-      body: { email, password }
+      body: JSON.stringify({ email, password })
     });
 
     localStorage.setItem("token", data.token);
-    window.location.href = "dashboard.html";
+    location.href = "/dashboard.html";
+
   } catch (e) {
-    alert("❌ Login failed");
-    console.error(e);
+    out.textContent = "❌ Login failed";
   }
 };

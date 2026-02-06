@@ -1,39 +1,22 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard</title>
-</head>
 <body>
-
 <h2>Dashboard</h2>
-<button onclick="me()">Load Profile</button>
+<pre id="out">Loading...</pre>
 
-<pre id="out"></pre>
-
-<script>
-const API = "https://axiom-backend-cnkz.onrender.com";
+<script type="module">
 const token = localStorage.getItem("token");
 
 if (!token) {
-  location.href = "index.html";
+  location.href = "/";
 }
 
-async function me() {
-  try {
-    const res = await fetch(API + "/api/me", {
-      headers: {
-        "Authorization": "Bearer " + token
-      }
-    });
-
-    const text = await res.text();
-    out.textContent = text;
-
-  } catch (e) {
-    out.textContent = "ERROR\\n" + e.toString();
-  }
-}
+fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
+  headers: { Authorization: "Bearer " + token }
+})
+.then(r => r.json())
+.then(d => out.textContent = JSON.stringify(d, null, 2))
+.catch(() => out.textContent = "❌ Unauthorized");
 </script>
 
 </body>

@@ -1,61 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="UTF-8">
-  <title>Axiom Login</title>
-</head>
 <body>
-
 <h2>Axiom Login</h2>
 
-<input id="email" value="verify@axiom.ai"><br><br>
-<input id="password" type="password" value="123456"><br><br>
+<input id="email" type="email" placeholder="Email"><br><br>
+<input id="password" type="password" placeholder="Password"><br><br>
 
-<button onclick="login()">Login</button>
+<button id="loginBtn">Login</button>
 
 <pre id="out"></pre>
 
-<script>
-const API = "https://axiom-backend-cnkz.onrender.com";
-
-async function login() {
-  out.textContent = "Sending request…";
-
-  try {
-    const res = await fetch(API + "/api/auth/login", {
-      method: "POST",
-      mode: "cors",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        email: email.value.trim(),
-        password: password.value.trim()
-      })
-    });
-
-    out.textContent = "HTTP " + res.status;
-
-    const text = await res.text();
-    out.textContent += "\\nRAW RESPONSE:\\n" + text;
-
-    const data = JSON.parse(text);
-
-    if (!res.ok) {
-      out.textContent += "\\n❌ LOGIN FAILED";
-      return;
-    }
-
-    localStorage.setItem("token", data.token);
-    out.textContent += "\\n✅ LOGIN OK";
-    location.href = "dashboard.html";
-
-  } catch (e) {
-    out.textContent = "❌ NETWORK ERROR\\n" + e.toString();
-    console.error(e);
-  }
-}
-</script>
-
+<script type="module" src="js/auth.js"></script>
 </body>
 </html>
