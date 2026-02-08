@@ -1,1 +1,1 @@
-const API_URL = "https://axiom-backend-final.onrender.com";
+const API = "https://axiom-backend-final.onrender.com";
