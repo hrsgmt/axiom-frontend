@@ -15,7 +15,7 @@ form.addEventListener("submit", async (e) => {
 
     show("STEP 1 → sending login");
 
-    const res = await fetch("http://127.0.0.1:4000/api/auth/login", {
+    const res = await fetch("https://axiom-backend-final.onrender.com/api/auth/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ email, password })
@@ -32,7 +32,7 @@ form.addEventListener("submit", async (e) => {
     localStorage.setItem("token", data.token);
     show("STEP 2 → token saved");
 
-    const me = await fetch("http://127.0.0.1:4000/api/me", {
+    const me = await fetch("https://axiom-backend-final.onrender.com/api/me", {
       headers: { Authorization: "Bearer " + data.token }
     });
 
