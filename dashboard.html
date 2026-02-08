@@ -1,36 +1,13 @@
-<button id="logout">Logout</button>
-<button id="logout">Logout</button><script>document.getElementById("logout").onclick=()=>{localStorage.removeItem("token");location.href="/";};</script>
-<script>
-if(!localStorage.getItem("token")){location.href="/";}
-</script>
 <!DOCTYPE html>
 <html>
-<body><script src="/js/guard.js"></script><button onclick="logout()">Logout</button><script src="/js/logout.js"></script><script src="/js/guard.js"></script><script src="/js/token-check.js"></script><script src="/js/guard.js"></script><script src="/js/guard.js"></script>
+<head><title>Dashboard</title></head>
+<body><script src="guard.js"></script>
+<script src="guard.js"></script>
+
 <h2>Dashboard</h2>
 <pre id="out">Loading...</pre>
-
-<script type="module">
-const token = localStorage.getItem("token");
-
-if (!token) {
-  location.href = "/";
-}
-
-fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
-  headers: { Authorization: "Bearer " + token }
-})
-.then(r => r.json())
-.then(d => out.textContent = JSON.stringify(d, null, 2))
-.catch(() => out.textContent = "❌ Unauthorized");
-</script>
-
-<script src="/js/logout.js"></script><button onclick="logout()">Logout</button><script src="/js/logout.js"></script></body>
-</html>
-
 <button onclick="logout()">Logout</button>
-<script>
-function logout(){
-  localStorage.removeItem("token");
-  location.href = "/";
-}
-</script>
+
+<script src="app.js"></script>
+</body>
+</html>
