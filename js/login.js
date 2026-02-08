@@ -1,4 +1,5 @@
 alert("TOKEN=" + localStorage.getItem("token"));
+alert("TOKEN=" + localStorage.getItem("token"));
 const form = document.getElementById("loginForm");
 const output = document.getElementById("output");
 
