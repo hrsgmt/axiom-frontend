@@ -33,8 +33,10 @@ form.addEventListener("submit", async (e) => {
 console.log("TOKEN=", data.token);
     show("STEP 2 → token saved");
 
+const stored = localStorage.getItem("token"); console.log("STORED TOKEN=", stored);
     const me = await fetch("https://axiom-backend-final.onrender.com/api/me", {
       headers: { Authorization: "Bearer " + data.token }
+console.log("HEADER TOKEN=", "Bearer " + data.token);
     });
 
     const meData = await me.json();
