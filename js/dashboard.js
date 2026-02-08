@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+const token = null;
 
 fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
   headers: { Authorization: "Bearer " + token }

@@ -1,15 +1,44 @@
 <!DOCTYPE html>
 <html>
+<head>
+  <title>Axiom Login</title>
+</head>
 <body>
-<h2>Axiom Login</h2>
 
-<input id="email" type="email" placeholder="Email"><br><br>
-<input id="password" type="password" placeholder="Password"><br><br>
+<h2>Login</h2>
 
-<button id="loginBtn">Login</button>
+<input id="email" value="auth@axiom.ai"><br><br>
+<input id="password" type="password" value="123456"><br><br>
+
+<button onclick="login()">Login</button>
 
 <pre id="out"></pre>
 
-<script type="module" src="js/auth.js"></script>
+<script>
+async function login() {
+  document.getElementById("out").textContent = "CLICK OK";
+
+  try {
+    const r = await fetch("http://127.0.0.1:4000/api/auth/login", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        email: email.value,
+        password: password.value
+      })
+    });
+
+    const d = await r.json();
+    localStorage.setItem("token", d.token);
+
+    document.getElementById("out").textContent =
+      "LOGIN OK\nTOKEN SAVED\n\n" + d.token;
+
+  } catch (e) {
+    document.getElementById("out").textContent = "ERROR";
+  }
+}
+</script>
+
 </body>
 </html>

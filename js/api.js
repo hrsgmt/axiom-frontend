@@ -1,40 +1,19 @@
-const API = "https://axiom-backend-cnkz.onrender.com";
-
-async function refreshAccess() {
-  const refreshToken = localStorage.getItem("refreshToken");
-  if (!refreshToken) throw new Error("No refresh");
-
-  const res = await fetch(API + "/api/auth/refresh", {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ refreshToken })
-  });
-
-  const data = await res.json();
-  localStorage.setItem("accessToken", data.accessToken);
-  return data.accessToken;
-}
+import { API_URL } from "./config.js";
 
 export async function api(path, options = {}) {
-  let token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("token");
 
-  let res = await fetch(API + path, {
-    ...options,
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: "Bearer " + token
-    }
-  });
+  options.headers = {
+    "Content-Type": "application/json",
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+    ...(options.headers || {})
+  };
 
-  if (res.status === 401) {
-    token = await refreshAccess();
-    res = await fetch(API + path, {
-      ...options,
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + token
-      }
-    });
+  const res = await fetch(`${API_URL}${path}`, options);
+
+  if (!res.ok) {
+    const err = await res.json();
+    throw err;
   }
 
   return res.json();

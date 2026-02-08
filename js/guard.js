@@ -1,4 +1,4 @@
-const token = localStorage.getItem("token");
+const token = null;
 if (!token) {
   location.href = "/";
 }
