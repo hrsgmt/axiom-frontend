@@ -27,7 +27,7 @@ fetch(API + "/api/feed", {
     const div = document.createElement("div");
 
     div.innerHTML = `
-      <img src="${u.profile.avatar || "https://i.pravatar.cc/40"}" width="32" height="32" style="border-radius:50%;vertical-align:middle;margin-right:8px;"><b>
+      <img src="${u.profile.avatar || "https://i.pravatar.cc/40"}" width="80" height="32" style="border-radius:50%;vertical-align:middle;margin-right:8px;"><b>
         <a href="/users/view.html?id=${post.userId}">
           ${name}
         </a>
