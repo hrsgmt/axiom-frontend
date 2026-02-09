@@ -1,19 +1,23 @@
-async function login(){
+const API = "https://axiom-backend-v1.onrender.com";
+
+async function login() {
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
 
-  const res = await fetch("https://axiom-backend-final.onrender.com/api/auth/login",{
-    method:"POST",
-    headers:{ "Content-Type":"application/json" },
-    body:JSON.stringify({ email, password })
+  const res = await fetch(API + "/api/auth/login", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ email, password })
   });
 
   const data = await res.json();
 
-  if(data.token){
+  if (data.token) {
     localStorage.setItem("token", data.token);
-    location.href="/dashboard.html";
-  }else{
-    alert(JSON.stringify(data));
+    window.location.href = "dashboard.html";
+  } else {
+    alert(data.error || "Login failed");
   }
 }
+
+window.login = login;
