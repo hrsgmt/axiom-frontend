@@ -7,6 +7,17 @@ fetch(API + "/api/feed", {
 })
 .then(r => r.json())
 .then(d => {
-  document.getElementById("out").innerText =
-    JSON.stringify(d, null, 2);
+  const out = document.getElementById("out");
+  out.innerHTML = "";
+
+  d.posts.forEach(p => {
+    const div = document.createElement("div");
+
+    div.innerHTML =
+      '<a href="/user.html?id=' + p.userId + '">' +
+      p.userId +
+      '</a>: ' + p.content;
+
+    out.appendChild(div);
+  });
 });
