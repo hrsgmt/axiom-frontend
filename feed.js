@@ -7,6 +7,17 @@ fetch(API + "/api/feed", {
 })
 .then(r => r.json())
 .then(d => {
-  document.getElementById("out").innerText =
-    JSON.stringify(d, null, 2);
+  const out = document.getElementById("out");
+
+  if (!d.posts || d.posts.length === 0) {
+    out.innerText = "No posts yet.";
+    return;
+  }
+
+  out.innerHTML = d.posts.map(p => `
+User: <a href="/users/view.html?id=${p.userId}">${p.userId}</a>
+Post: ${p.content}
+Time: ${new Date(p.createdAt).toLocaleString()}
+-------------------------
+`).join("\n");
 });
