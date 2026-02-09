@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html>
-<head><title>User</title></head>
+<head>
+  <title>User</title>
+</head>
 <body>
 
 <script src="/guard.js"></script>
 
 <h2>Public Profile</h2>
 
-<pre id="out">Loading...</pre>
+<div id="profile"></div>
+
+<h3>Posts</h3>
+<div id="posts"></div>
 
 <br>
 <a href="/feed.html">Back</a>
@@ -25,8 +30,33 @@ fetch(API + "/api/users/" + id, {
 })
 .then(r => r.json())
 .then(d => {
-  document.getElementById("out").innerText =
-    JSON.stringify(d, null, 2);
+
+  // profile
+  const p = d.profile;
+
+  document.getElementById("profile").innerHTML = `
+    <p><b>Name:</b> ${p.name}</p>
+    <p><b>Bio:</b> ${p.bio || "-"}</p>
+  `;
+
+  // posts
+  const container = document.getElementById("posts");
+
+  if (!d.posts.length) {
+    container.innerHTML = "No posts yet";
+    return;
+  }
+
+  d.posts.forEach(post => {
+    const div = document.createElement("div");
+    div.innerHTML = `
+      <p>${post.content}</p>
+      <small>${new Date(post.createdAt).toLocaleString()}</small>
+      <hr>
+    `;
+    container.appendChild(div);
+  });
+
 });
 </script>
 
