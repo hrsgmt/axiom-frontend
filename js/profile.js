@@ -4,7 +4,7 @@ if (!token) {
   location.href = "/";
 }
 
-fetch("https://axiom-backend-cnkz.onrender.com/api/me", {
+fetch("https://axiom-backend-fix.onrender.com/api/me", {
   headers: {
     Authorization: "Bearer " + token
   }

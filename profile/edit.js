@@ -1,4 +1,4 @@
-const API = "https://axiom-backend-v1.onrender.com";
+const API = "https://axiom-backend-fix.onrender.com";
 
 document.getElementById("save").onclick = async () => {
   const name = document.getElementById("name").value;

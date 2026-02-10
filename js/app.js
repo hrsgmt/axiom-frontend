@@ -10,7 +10,7 @@ form.addEventListener("submit", async (e) => {
 
   try {
     const res = await fetch(
-      "https://axiom-backend-cnkz.onrender.com/api/auth/login",
+      "https://axiom-backend-fix.onrender.com/api/auth/login",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

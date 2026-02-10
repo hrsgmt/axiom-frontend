@@ -1,4 +1,4 @@
-fetch("https://axiom-backend-v1.onrender.com/api/profile/me", {
+fetch("https://axiom-backend-fix.onrender.com/api/profile/me", {
   headers: {
     Authorization: "Bearer " + localStorage.getItem("token")
   }

@@ -4,7 +4,7 @@ document.querySelector("button").onclick = async () => {
   const email = document.querySelector("input[type=email]").value;
   const password = document.querySelector("input[type=password]").value;
 
-  const res = await fetch("https://axiom-backend-cnkz.onrender.com/api/auth/login", {
+  const res = await fetch("https://axiom-backend-fix.onrender.com/api/auth/login", {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })

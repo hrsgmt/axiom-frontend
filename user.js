@@ -1,4 +1,4 @@
-const API = "https://axiom-backend-v1.onrender.com";
+const API = "https://axiom-backend-fix.onrender.com";
 
 const params = new URLSearchParams(location.search);
 const id = params.get("id");
